@@ -55,8 +55,8 @@ public class Auction
     {
         Lot selectedLot = getLot(lotNumber);
         if(selectedLot != null) {
-            Bid aBid = new Bid(bidder, value);
-            boolean successful = selectedLot.bidFor(aBid);
+            //question 2
+            boolean successful = selectedLot.bidFor(new Bid(bidder, value));
             if(successful) {
                 System.out.println("The bid for lot number " +
                                    lotNumber + " was successful.");
@@ -73,7 +73,7 @@ public class Auction
 
     /**
      * Return the lot with the given number. Return null if a lot with this 
-     * number does not exist.
+     * number does not exist.v
      * @param lotNumber The number of the lot to return.
      * @return The lot with the given number, or null.
      */
@@ -99,6 +99,31 @@ public class Auction
                                " does not exist.");
             return null;
         }
+    }
+    
+    //question 3
+    public void close(){
+        for (Lot aLot : listOfLots){
+            Bid highest = aLot.getHighestBid();
+            if (highest == null){
+                System.out.println("No bidder for this lot");
+            }else{
+                System.out.println("The bidder is " + highest.getBidder().getName());
+                System.out.println("The value is " + highest.getValue());
+            }
+        }
+    }
+    
+    //question 6
+    public ArrayList<Lot> getUnsold(){
+        ArrayList<Lot> unsold = new ArrayList<>();
+        for (Lot aLot : listOfLots){
+            Bid highest = aLot.getHighestBid();
+            if (highest == null){
+                unsold.add(aLot);
+            }
+        }
+        return unsold;
     }
 }
 
