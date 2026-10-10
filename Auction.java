@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+import java.util.Iterator;
 /**
  * A simple model of an auction.
  * The auction maintains a list of lots of arbitrary length.
@@ -111,6 +111,20 @@ public class Auction
             }
         }
         return unsold;
+    }
+    
+    //question 7
+    public Lot removeLot(int number)
+    {
+        Iterator<Lot> it = listOfLots.iterator();
+        while (it.hasNext()) {
+            Lot aLot = it.next();
+            if (aLot.getNumber() == number) {
+                it.remove();
+                return aLot;
+            }
+        }
+        return null;
     }
 }
 
